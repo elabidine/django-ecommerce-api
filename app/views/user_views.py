@@ -21,7 +21,6 @@ class CurrentUserView(APIView):
         user_id = CustomUser.objects.get(pk=request.user.pk) 
         serializer = UserRegistrationSerializer(user_id, data=request.data, partial=True)  
         if serializer.is_valid():
-            print(">>>>>>>>>>>>>>",request.user.password)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
